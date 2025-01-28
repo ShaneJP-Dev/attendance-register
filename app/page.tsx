@@ -29,24 +29,3 @@ export default function Home() {
     </section>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/check-role`, {
-    headers: {
-      cookie: context.req.headers.cookie || '',
-    },
-  });
-
-  if (res.redirected) {
-    return {
-      redirect: {
-        destination: res.url,
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-};
